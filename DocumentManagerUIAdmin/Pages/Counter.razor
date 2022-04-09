@@ -1,0 +1,32 @@
+﻿@page "/counter"
+
+
+@page "/form-example-1"
+@using ModelDomain
+@using System.Net.Http
+@inject HttpClient Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+
+
+<p>@documentList.FirstOrDefault().Title</p>
+
+@code {
+
+    private void HandleValidSubmit()
+    {
+
+        // Process the valid form
+    }
+}
+@code {
+    private List<Document> documentList;
+    private Document selectedDocument;
+
+    protected override async Task OnInitializedAsync()
+    {
+        documentList = await Http.GetFromJsonAsync<List<Document>>("https://localhost:5001/api/Documents");
+        //selectedDocument = await Http.GetFromJsonAsync<Document>("https://localhost:5001/api/Documents" + documentList.FirstOrDefault().Id);
+
+    }
+}
